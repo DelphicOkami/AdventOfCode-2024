@@ -53,3 +53,12 @@ func (suite *D6Suite) TestRaceWinOptions() {
 func (suite *D6Suite) TestD6P1CalculateTotal() {
 	assert.Equal(suite.T(), 288, days.D6P1CalculateTotal(suite.Races))
 }
+
+func (suite *D6Suite) TestD6ParseRace() {
+	expected :=  days.D6Race{
+		Time: 71530,
+		TargetDistance: 940200,
+	}
+	assert.Equal(suite.T(), expected, days.D6ParseRace(suite.ProvidedInput))
+}
+

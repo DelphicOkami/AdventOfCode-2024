@@ -50,13 +50,16 @@ func main() {
 					case 1: 
 						races := days.D6ParseRaces(lines)
 						out = strconv.Itoa(days.D6P1CalculateTotal(races))
+					case 2: 
+						race := days.D6ParseRace(lines)
+						out = strconv.Itoa(len(race.GetWinOptions()))
 					}
 	default:
-		fmt.Println("Invalid day provided")
+		fmt.Printf("Invalid day %d provided\n", *day)
 		os.Exit(1)
 	}
 	if out == "" {
-		fmt.Println("invalid Day / part combo")
+		fmt.Printf("Day %d Part %d not implemented yet", *day, *part)
 	} else {
 		fmt.Printf("Day %d Part %d result: %s\n", *day, *part, out)
 	}
