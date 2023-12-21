@@ -44,6 +44,13 @@ func main() {
 					d5map := days.D5ParseInput(lines)
 					out = strconv.Itoa(d5map.GetClosestSeedLocationFromRanges())
 				}
+
+			case 6:
+				switch *part {
+					case 1: 
+						races := days.D6ParseRaces(lines)
+						out = strconv.Itoa(days.D6P1CalculateTotal(races))
+					}
 	default:
 		fmt.Println("Invalid day provided")
 		os.Exit(1)
