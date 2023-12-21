@@ -40,7 +40,9 @@ func main() {
 					d5map := days.D5ParseInput(lines)
 					out = strconv.Itoa(d5map.GetClosestSeedLocation())
 				case 2: 
-					
+					fmt.Println("This is inefficient and takes a while to run, but it gets there")
+					d5map := days.D5ParseInput(lines)
+					out = strconv.Itoa(d5map.GetClosestSeedLocationFromRanges())
 				}
 	default:
 		fmt.Println("Invalid day provided")

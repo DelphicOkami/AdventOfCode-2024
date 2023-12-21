@@ -12,6 +12,7 @@ type D5Suite struct {
     suite.Suite
     ProvidedInput []string
 	SoilToFertilizer []days.D5MapRange
+	SeedRanges []days.D5MapSeedRange
 }
 
 func TestRunD5Suite(t *testing.T) {
@@ -75,11 +76,23 @@ func (suite *D5Suite) SetupTest() {
 			DestEnd: 53,
 		},
 	}
+
+	suite.SeedRanges = []days.D5MapSeedRange{
+		days.D5MapSeedRange{
+			Start: 79,
+			End: 92,
+		   },
+		   days.D5MapSeedRange{
+			Start: 55,
+			End: 67,
+		   },
+	}
 }
 
 func (suite *D5Suite) TestMapParsing() {
 	expected := days.D5Map{
 		Seeds: []int{79, 14, 55, 13},
+		SeedsAsRanges: suite.SeedRanges,
 		SeedToSoil: []days.D5MapRange{
 			{
 				SourceStart: 98,
@@ -221,3 +234,9 @@ func (suite *D5Suite) TestGetClosestSeedLocation() {
 	d5map := days.D5ParseInput(suite.ProvidedInput)
 	assert.Equal(suite.T(), 35, d5map.GetClosestSeedLocation())
 }
+
+func (suite *D5Suite) TestGetClosestSeedLocationFromRanges() {
+	d5map := days.D5ParseInput(suite.ProvidedInput)
+	assert.Equal(suite.T(), 46, d5map.GetClosestSeedLocationFromRanges())
+}
+
