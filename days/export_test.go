@@ -1,0 +1,3 @@
+package days
+var D4ParseCard = d4ParseCard
+var SpaceSeparatedNumbersToIntSlice = spaceSeparatedNumbersToIntSlice
