@@ -34,6 +34,14 @@ func main() {
 			case 2: 
 				out = strconv.Itoa(days.DayFourPart2(lines))
 			}
+		case 5:
+			switch *part {
+				case 1: 
+					d5map := days.D5ParseInput(lines)
+					out = strconv.Itoa(d5map.GetClosestSeedLocation())
+				case 2: 
+					
+				}
 	default:
 		fmt.Println("Invalid day provided")
 		os.Exit(1)
