@@ -21,6 +21,36 @@ func DayFourPart1(input []string) int {
 
 	return gpSum
 }
+func DayFourPart2(input []string) int {
+	cardCount := calculateGrantedD4Copies(input)
+	
+	cardSum := 0
+	for _, no := range cardCount {
+		cardSum += no
+	}
+	return cardSum
+}
+
+func calculateGrantedD4Copies (input []string) []int {
+	cardCount := make([]int, len(input))
+	for i:= 0; i < len(cardCount); i++{
+		cardCount[i] = 1
+	}
+	for i, cl := range input {
+		card := d4ParseCard(cl)
+		cardCopies := cardCount[i]
+		matches := card.GetWinningMatches()
+		for mi := 1; mi <= len(matches); mi++ {
+			copyIndex := mi + i
+			// Don't go out of card bounds
+			if copyIndex >= len(cardCount) {
+				break
+			}
+			cardCount[copyIndex] += cardCopies
+		}
+	}
+	return cardCount
+}
 
 func d4ParseCard(cardLine string) D4card {
 	colonIndex := strings.Index(cardLine, ":")
