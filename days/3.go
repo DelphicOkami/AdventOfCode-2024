@@ -1,22 +1,30 @@
 package days
 
 import (
+	// "fmt"
 	"regexp"
 	"strconv"
+	"strings"
 )
 
 func DayThreePart1(input []string) int {
 	result := 0
-	for _, str := range input {
-		mulList := GetMultiplicationList(str)
-		for _, mul := range mulList {
-			result += mul.Multiply()
-		}
+	mulList := GetThreeMultiplicationList(strings.Join(input, ""), true)
+	for _, mul := range mulList {
+		result += mul.Multiply()
+	}
+	return result
+}
+func DayThreePart2(input []string) int {
+	result := 0
+	mulList := GetThreeConditionalMultiplicationList(strings.Join(input, ""))
+	for _, mul := range mulList {
+		result += mul.Multiply()
 	}
 	return result
 }
 
-func GetMultiplicationList(input string) []D3Mul {
+func GetThreeMultiplicationList(input string, active bool) []D3Mul {
 	out := make([]D3Mul, 0)
 	reg := regexp.MustCompile(`mul\([\d]{1,3},[\d]{1,3}\)`)
 	matches := reg.FindAllString(input, -1)
@@ -27,8 +35,19 @@ func GetMultiplicationList(input string) []D3Mul {
 	for _, match := range matches {
 		out = append(out, D3Mul{
 			Original: match,
-			Active: true,
+			Active: active,
 		})
+	}
+	return out
+}
+
+func GetThreeConditionalMultiplicationList(input string) []D3Mul {
+	out := make([]D3Mul, 0)
+	dos := strings.Split(input, "do()")
+	for _, do := range dos {
+		subdo, subdont, _ := strings.Cut(do, "don't()")
+		out = append(out, GetThreeMultiplicationList(subdo, true)...)
+		out = append(out, GetThreeMultiplicationList(subdont, false)...)
 	}
 	return out
 }
