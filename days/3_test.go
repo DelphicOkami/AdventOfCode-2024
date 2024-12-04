@@ -19,7 +19,7 @@ func TestDayThreePartTwoCasesPresented(t *testing.T) {
 
 func TestGetMultiplicationList(t *testing.T) {
 	input := "xmul(2,4)%&mul[3,7]!@^do_not_mul(5,5)+mul(32,64]then(mul(11,8)mul(8,5))"
-	mul := days.GetThreeMultiplicationList(input, true)
+	mul := days.GetThreeMultiplicationList(input)
 	assert.Equal(t, 4, len(mul))
 	assert.Equal(t, 2, mul[0].GetLeftValue())
 	assert.Equal(t, 4, mul[0].GetRightValue())
