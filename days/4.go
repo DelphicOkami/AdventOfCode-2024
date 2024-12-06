@@ -24,18 +24,18 @@ type Day4 struct {
 	Grid [][]rune
 }
 
-func (d *Day4) GetRune(x int, y int) (rune, error) {
+func (d *Day4) GetRune(y int, x int) (rune, error) {
 	if (x < 0 || y < 0) {
 		return '*', fmt.Errorf("out of bounds")
 	}
-	if (x >= len(d.Grid)) {
+	if (y >= len(d.Grid)) {
 		return '*', fmt.Errorf("out of bounds")
 	}
-	row := d.Grid[x]
-	if (y >= len(row)) {
+	row := d.Grid[y]
+	if (x >= len(row)) {
 		return '*', fmt.Errorf("out of bounds")
 	}
-	return row[y], nil
+	return row[x], nil
 }
 func (d *Day4) CoordMatches(x int, y int, r rune) bool {
 	char, err := d.GetRune(x, y)
