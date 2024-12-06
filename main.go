@@ -67,7 +67,7 @@ func main() {
 						case 1: 
 							out = strconv.Itoa(days.DaySixPart1(lines))
 						case 2: 
-							// out = strconv.Itoa(days.DaySixPart2(lines))
+							out = strconv.Itoa(days.DaySixPart2(lines))
 						}
 	default:
 		fmt.Printf("Invalid day %d provided\n", *day)

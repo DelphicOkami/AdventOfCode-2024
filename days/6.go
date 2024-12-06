@@ -18,6 +18,22 @@ func DaySixPart1 (input []string) int {
 	}
 	return len(coords)
 }
+func DaySixPart2 (input []string) int {
+	coords := make([]Coords, 0)
+	mp := ParseDay6Map(input) 
+	for y, row := range mp.Grid.Grid {
+		for x, _ := range row {
+			if mp.Grid.Grid[y][x] == '#' {continue}
+			thisMap := mp.Copy()
+			thisMap.Grid.Grid[y][x] = '#'
+			if (thisMap.DetectLoop()) {
+				coords = append(coords, Coords{X: x, Y: y})
+			}
+			thisMap = Day6Map{}
+		}
+	}
+	return len(coords)
+}
 
 func ParseDay6Map (input []string) Day6Map {
 	grid := GetDay4(input)
@@ -80,4 +96,38 @@ func (d *Day6Map) Move() error {
 	d.Guard.Position.X = newX
 	d.Guard.Position.Y = newY
 	return nil
+}
+
+func (d *Day6Map) DetectLoop() bool {
+	coords := make(map[Coords]rune, 0)
+	for {
+	
+		val, ok := coords[d.Guard.Position]
+		if !ok {
+			coords[d.Guard.Position] = d.Guard.Facing
+		} else if val == d.Guard.Facing {
+			return true
+		}
+		err := d.Move()
+		if err != nil { return false }
+	}
+}
+
+func (d *Day6Map) Copy() Day6Map {
+	grid := make([][]rune, 0)
+	for _, row := range d.Grid.Grid {
+		r := make([]rune, 0)
+		for _, cell := range row {
+			r = append(r, cell)
+		}
+		grid = append(grid, r)
+	}
+	g := Guard{
+		Position: Coords{X: d.Guard.Position.X, Y: d.Guard.Position.Y},
+		Facing: d.Guard.Facing,
+	}
+	return Day6Map{
+		Grid: Day4{Grid: grid},
+		Guard: g,
+	}
 }
