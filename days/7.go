@@ -110,6 +110,7 @@ func (s *DaySevenSum) DoesWork(ops []string) bool {
 			case "||":
 				prev, _ = strconv.Atoi(strconv.Itoa(prev) + strconv.Itoa(s.Inputs[i+1]))
 			}
+			// if prev > s.Result { break }
 		}
 		if prev == s.Result {
 			return true
