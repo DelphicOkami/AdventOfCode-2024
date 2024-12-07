@@ -27,7 +27,6 @@ func TestGetDay4StringToRuneSlice(t *testing.T) {
 	assert.Equal(t, 'X', d4.Grid[0][4])
 }
 
-
 func TestGetRunFromGrid(t *testing.T) {
 	input := []string{"MMMSXXMASM", "MSAMXMSMSA", "AMXSXMAAMM", "MSAMASMSMX", "XMASAMXAMM", "XXAMMXXAMA", "SMSMSASXSS", "SAXAMASAAA", "MAMMMXMMMM", "MXMXAXMASX"}
 	d4 := days.GetDay4(input)

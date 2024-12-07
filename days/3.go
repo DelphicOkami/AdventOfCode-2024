@@ -51,8 +51,8 @@ func GetThreeConditionalMultiplicationList(input string) []D3Mul {
 }
 
 type D3Mul struct {
-	Original string
-	leftValue int
+	Original   string
+	leftValue  int
 	rightValue int
 }
 

@@ -28,7 +28,7 @@ func TestDayOneParsing(t *testing.T) {
 	expected1 = append(expected1, 22289)
 	expected2 = append(expected2, 36089)
 	expected2 = append(expected2, 41038)
-	
+
 	assert.Equal(t, expected1, parsed[0])
 	assert.Equal(t, expected2, parsed[1])
 }
@@ -52,6 +52,5 @@ func TestCountNeedlesInHaystack(t *testing.T) {
 	assert.Equal(t, 0, days.CountNeedlesInHaystack(7, haystack))
 	assert.Equal(t, 0, days.CountNeedlesInHaystack(8, haystack))
 	assert.Equal(t, 1, days.CountNeedlesInHaystack(9, haystack))
-
 
 }

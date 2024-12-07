@@ -10,7 +10,7 @@ func DayTwoPart1(input []string) int {
 	safeCount := 0
 	reportSafety := FindDayTwoSafeReports(input)
 	for _, safe := range reportSafety {
-		if (safe) {
+		if safe {
 			safeCount++
 		}
 	}
@@ -21,7 +21,7 @@ func DayTwoPart2(input []string) int {
 	safeCount := 0
 	reportSafety := FindDayTwoSafeReportsWithDampener(input)
 	for _, safe := range reportSafety {
-		if (safe) {
+		if safe {
 			safeCount++
 		}
 	}
@@ -62,26 +62,26 @@ func IsReportSafeWithDamnpener(report []int) bool {
 	reportClone := make([]int, len(report))
 	copy(reportClone, report)
 	safe := IsReportSafeWithoutDamnpener(report)
-	if (safe) {
+	if safe {
 		return true
 	}
 	unsafeIndexes := make([]int, 0)
 	for i, _ := range report {
 		safeReport := RemoveIntIndex(reportClone, i)
-		if (IsReportSafeWithoutDamnpener(safeReport)) {
+		if IsReportSafeWithoutDamnpener(safeReport) {
 			unsafeIndexes = append(unsafeIndexes, i)
 		}
 	}
-	if (len(unsafeIndexes) == 0) {
+	if len(unsafeIndexes) == 0 {
 		return false
 	}
-	if (len(unsafeIndexes) == 1) {
+	if len(unsafeIndexes) == 1 {
 		return true
 	}
-	if (len(unsafeIndexes) > 2) {
+	if len(unsafeIndexes) > 2 {
 		return false
 	} else {
-		return (unsafeIndexes[1] - unsafeIndexes[0] == 1)
+		return (unsafeIndexes[1]-unsafeIndexes[0] == 1)
 	}
 }
 
@@ -92,34 +92,34 @@ func IsReportSafeWithoutDamnpener(report []int) bool {
 	var decrease = true
 
 	for i, val := range report {
-		if (i == 0) {
+		if i == 0 {
 			prevValue = val
 			continue
 		}
 		diff = prevValue - val
-		if (diff == 0) {
+		if diff == 0 {
 			return false
 		}
-		if (increase) {
-			if (diff > 3) {
+		if increase {
+			if diff > 3 {
 				return false
-			} else if (diff < 0) {
+			} else if diff < 0 {
 				increase = false
 			}
 		}
-		
-		if (decrease) {
-			if (diff < -3) {
+
+		if decrease {
+			if diff < -3 {
 				return false
-			} else if (diff > 0) {
+			} else if diff > 0 {
 				decrease = false
 			}
 		}
-		
-		if (!increase && !decrease ) {
+
+		if !increase && !decrease {
 			return false
 		}
-		
+
 		prevValue = val
 	}
 	return true

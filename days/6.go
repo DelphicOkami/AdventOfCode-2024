@@ -4,29 +4,34 @@ import (
 	"slices"
 )
 
-var directions = map[rune][]int{'^':{0, -1},'>':{1, 0},'v':{0, 1}, '<':{-1, 0}}
-func DaySixPart1 (input []string) int {
+var directions = map[rune][]int{'^': {0, -1}, '>': {1, 0}, 'v': {0, 1}, '<': {-1, 0}}
+
+func DaySixPart1(input []string) int {
 	coords := make([]Coords, 0)
-	mp := ParseDay6Map(input) 
+	mp := ParseDay6Map(input)
 
 	for {
 		if !slices.Contains(coords, mp.Guard.Position) {
 			coords = append(coords, mp.Guard.Position)
 		}
 		err := mp.Move()
-		if err != nil { break }
+		if err != nil {
+			break
+		}
 	}
 	return len(coords)
 }
-func DaySixPart2 (input []string) int {
+func DaySixPart2(input []string) int {
 	coords := make([]Coords, 0)
-	mp := ParseDay6Map(input) 
+	mp := ParseDay6Map(input)
 	for y, row := range mp.Grid.Grid {
 		for x, _ := range row {
-			if mp.Grid.Grid[y][x] == '#' {continue}
+			if mp.Grid.Grid[y][x] == '#' {
+				continue
+			}
 			thisMap := mp.Copy()
 			thisMap.Grid.Grid[y][x] = '#'
-			if (thisMap.DetectLoop()) {
+			if thisMap.DetectLoop() {
 				coords = append(coords, Coords{X: x, Y: y})
 			}
 			thisMap = Day6Map{}
@@ -35,7 +40,7 @@ func DaySixPart2 (input []string) int {
 	return len(coords)
 }
 
-func ParseDay6Map (input []string) Day6Map {
+func ParseDay6Map(input []string) Day6Map {
 	grid := GetDay4(input)
 	guard := Guard{}
 	for x, column := range grid.Grid {
@@ -48,7 +53,7 @@ func ParseDay6Map (input []string) Day6Map {
 		}
 	}
 	return Day6Map{
-		Grid: grid,
+		Grid:  grid,
 		Guard: guard,
 	}
 }
@@ -60,24 +65,24 @@ type Coords struct {
 
 type Guard struct {
 	Position Coords
-	Facing rune
+	Facing   rune
 }
 
 func (g *Guard) Turn() {
 	switch g.Facing {
-		case '^':
-			g.Facing = '>'
-		case '>':
-			g.Facing = 'v'
-		case 'v':
-			g.Facing = '<'
-		case '<':
-			g.Facing = '^'
+	case '^':
+		g.Facing = '>'
+	case '>':
+		g.Facing = 'v'
+	case 'v':
+		g.Facing = '<'
+	case '<':
+		g.Facing = '^'
 	}
 }
 
-type Day6Map struct{
-	Grid Day4
+type Day6Map struct {
+	Grid  Day4
 	Guard Guard
 }
 
@@ -101,7 +106,7 @@ func (d *Day6Map) Move() error {
 func (d *Day6Map) DetectLoop() bool {
 	coords := make(map[Coords]rune, 0)
 	for {
-	
+
 		val, ok := coords[d.Guard.Position]
 		if !ok {
 			coords[d.Guard.Position] = d.Guard.Facing
@@ -109,7 +114,9 @@ func (d *Day6Map) DetectLoop() bool {
 			return true
 		}
 		err := d.Move()
-		if err != nil { return false }
+		if err != nil {
+			return false
+		}
 	}
 }
 
@@ -124,10 +131,10 @@ func (d *Day6Map) Copy() Day6Map {
 	}
 	g := Guard{
 		Position: Coords{X: d.Guard.Position.X, Y: d.Guard.Position.Y},
-		Facing: d.Guard.Facing,
+		Facing:   d.Guard.Facing,
 	}
 	return Day6Map{
-		Grid: Day4{Grid: grid},
+		Grid:  Day4{Grid: grid},
 		Guard: g,
 	}
 }

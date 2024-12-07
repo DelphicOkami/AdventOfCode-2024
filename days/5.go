@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func DayFivePart1 (input []string) int {
+func DayFivePart1(input []string) int {
 	d := Parse5Input(input)
 	correctSets := make([][]int, 0)
 	for _, pages := range d.PageSets {
@@ -18,12 +18,12 @@ func DayFivePart1 (input []string) int {
 	}
 	out := 0
 	for _, i := range correctSets {
-		out += i[(len(i) - 1) / 2]
+		out += i[(len(i)-1)/2]
 	}
 	return out
 }
 
-func DayFivePart2 (input []string) int {
+func DayFivePart2(input []string) int {
 	d := Parse5Input(input)
 	correctSets := make([][]int, 0)
 	for _, pages := range d.PageSets {
@@ -35,12 +35,12 @@ func DayFivePart2 (input []string) int {
 	}
 	out := 0
 	for _, i := range correctSets {
-		out += i[(len(i) - 1) / 2]
+		out += i[(len(i)-1)/2]
 	}
 	return out
 }
 
-func Parse5Input (input []string) FivePagePrintOrder {
+func Parse5Input(input []string) FivePagePrintOrder {
 	rules := make([]FiveRule, 0)
 	pages := make([][]int, 0)
 	for _, line := range input {
@@ -62,7 +62,7 @@ func Parse5Input (input []string) FivePagePrintOrder {
 		}
 	}
 	return FivePagePrintOrder{
-		Rules: rules,
+		Rules:    rules,
 		PageSets: pages,
 	}
 }
@@ -76,14 +76,14 @@ func FiveGetPageOrder(rules []FiveRule, pages []int) []int {
 }
 
 func fiveGetRulesetSort(rules []FiveRule) func(i, j int) int {
-	return func (i, j int) int {
+	return func(i, j int) int {
 		for _, r := range rules {
 			if !r.DoesRuleApply([]int{i, j}) {
 				continue
 			}
-			if r.First == i  {
+			if r.First == i {
 				return -1
-			} 
+			}
 			return 1
 		}
 		return 0
@@ -91,7 +91,7 @@ func fiveGetRulesetSort(rules []FiveRule) func(i, j int) int {
 }
 
 type FivePagePrintOrder struct {
-	Rules []FiveRule
+	Rules    []FiveRule
 	PageSets [][]int
 }
 
@@ -106,10 +106,10 @@ func (po *FivePagePrintOrder) GetRuleSetFor(pages []int) []FiveRule {
 }
 
 type FiveRule struct {
-	First int
+	First  int
 	Second int
 }
 
 func (r *FiveRule) DoesRuleApply(pages []int) bool {
-	return slices.Contains(pages, r.First) && slices.Contains(pages, r.Second) 
+	return slices.Contains(pages, r.First) && slices.Contains(pages, r.Second)
 }

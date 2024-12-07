@@ -15,7 +15,7 @@ func DayOnePart1(input []string) int {
 
 	for i, left := range leftList {
 		right := rightList[i]
-		if (left >= right) {
+		if left >= right {
 			gpSum += left - right
 		} else {
 			gpSum += right - left
@@ -65,7 +65,7 @@ func SortSliceAscending(input []int) []int {
 func CountNeedlesInHaystack(needle int, haystack []int) int {
 	out := 0
 	for _, straw := range haystack {
-		if (straw == needle) {
+		if straw == needle {
 			out++
 		}
 	}
