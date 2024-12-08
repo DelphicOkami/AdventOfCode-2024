@@ -22,13 +22,12 @@ func GetDay4(input []string) Day4 {
 
 type Day4 struct {
 	Grid [][]rune
+	maxX int
+	maxY int
 }
 
 func (d *Day4) GetRune(y int, x int) (rune, error) {
-	if x < 0 || y < 0 {
-		return '*', fmt.Errorf("out of bounds")
-	}
-	if y >= len(d.Grid) {
+	if x < 0 || y < 0 || y > d.GetMaxY() || x > d.GetMaxX() {
 		return '*', fmt.Errorf("out of bounds")
 	}
 	row := d.Grid[y]
@@ -37,6 +36,25 @@ func (d *Day4) GetRune(y int, x int) (rune, error) {
 	}
 	return row[x], nil
 }
+
+
+
+func (g *Day4) GetMaxX() int {
+	if g.maxX == 0 {
+		for _, row := range g.Grid {
+			g.maxX = max(g.maxX, len(row) - 1)
+		}
+	}
+	return g.maxX
+}
+
+func (g *Day4) GetMaxY() int {
+	if g.maxY == 0 {
+		g.maxY = len(g.Grid) - 1
+	}
+	return g.maxY
+}
+
 func (d *Day4) CoordMatches(x int, y int, r rune) bool {
 	char, err := d.GetRune(x, y)
 	if err != nil {
