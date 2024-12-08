@@ -1,7 +1,6 @@
 package days
 
-import (
-)
+import ()
 
 func DayBlankPart1(input []string) int {
 	return 0

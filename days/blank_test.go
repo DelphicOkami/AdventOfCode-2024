@@ -23,3 +23,7 @@ func (suite *BlankSuite) SetupTest() {
 func (suite *BlankSuite) TestOneCasesPresented() {
 	assert.Equal(suite.T(), 0, days.DayBlankPart1(suite.ProvidedInput))
 }
+
+func (suite *BlankSuite) TestTwoCasesPresented() {
+	assert.Equal(suite.T(), 0, days.DayBlankPart2(suite.ProvidedInput))
+}
