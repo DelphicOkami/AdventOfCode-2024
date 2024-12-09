@@ -12,6 +12,11 @@ if [ -z "${dayName}" ]; then
     exit 1
 fi
 
+if [ -f days/${day}.go ]; then
+    echo "Day ${day} already created"
+    exit 1
+fi
+
 cp days/blank.go "days/${day}.go"
 cp days/blank_test.go "days/${day}_test.go"
 
