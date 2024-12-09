@@ -83,6 +83,13 @@ func main() {
 		case 2:
 			out = strconv.Itoa(days.DayEightPart2(lines))
 		}
+	case 9:
+		switch *part {
+		case 1:
+			out = strconv.Itoa(days.DayNinePart1(lines))
+		case 2:
+			out = strconv.Itoa(days.DayNinePart2(lines))
+		}
 	default:
 		fmt.Printf("Invalid day %d provided\n", *day)
 		os.Exit(1)
