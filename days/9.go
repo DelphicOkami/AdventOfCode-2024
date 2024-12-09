@@ -135,12 +135,16 @@ func (d *Disk9) ChunkDefrag() {
 	for fileID := startI; fileID >= 0; fileID-- {
 		fileLength, _ := d.GetFileLen(fileID)
 		spaceStart, err := d.GetNextFreeOfSizeSpace(fileLength)
-        if err != nil { continue }
+		if err != nil {
+			continue
+		}
 		fileStart, _ := d.GetFileStart(fileID)
-		if fileStart <= spaceStart { continue }
+		if fileStart <= spaceStart {
+			continue
+		}
 		for move := 0; move < fileLength; move++ {
-			d.FullMap[spaceStart + move] = fileID
-			d.FullMap[fileStart + move] = -1
+			d.FullMap[spaceStart+move] = fileID
+			d.FullMap[fileStart+move] = -1
 		}
 	}
 }

@@ -81,7 +81,9 @@ func (g *Day4) GetAntenodes(c []Coords) []Coords {
 			dX, dY := coordA.DistanceTo(coordB)
 			ant := coordA.GetCoordAt(dX, dY)
 			if g.IsInGrid(ant) {
-				if !slices.Contains(out, ant) {out = append(out, ant)}
+				if !slices.Contains(out, ant) {
+					out = append(out, ant)
+				}
 			}
 		}
 	}
@@ -104,14 +106,14 @@ func (g *Day4) GetResonantAntenodes(c []Coords) []Coords {
 			dX, dY := coordA.GetDirection(coordB)
 			coord := coordA.GetCoordAt(dX, dY)
 			for ok := true; ok; ok = g.IsInGrid(coord) {
-				if (!slices.Contains(out, coord) && g.IsInGrid(coord)) {
+				if !slices.Contains(out, coord) && g.IsInGrid(coord) {
 					out = append(out, coord)
 				}
 				coord = coord.GetCoordAt(dX, dY)
 			}
-			coord = coordA.GetCoordAt(dX *-1, dY *-1)
+			coord = coordA.GetCoordAt(dX*-1, dY*-1)
 			for ok := true; ok; ok = g.IsInGrid(coord) {
-				if (!slices.Contains(out, coord) && g.IsInGrid(coord)) {
+				if !slices.Contains(out, coord) && g.IsInGrid(coord) {
 					out = append(out, coord)
 				}
 				coord = coord.GetCoordAt(dX*-1, dY*-1)
@@ -147,11 +149,11 @@ func (c *Coords) GetDirection(c2 Coords) (int, int) {
 	dX, dY := c.DistanceTo(c2)
 	cdX := dX
 	cdY := dY
-	if (dX < 0) {
-		cdX = dX * - 1
+	if dX < 0 {
+		cdX = dX * -1
 	}
-	if (dY < 0) {
-		cdY = dY * - 1
+	if dY < 0 {
+		cdY = dY * -1
 	}
 	XFactors := getFactors(cdX)
 	YFactors := getFactors(cdY)
@@ -170,6 +172,6 @@ func getFactors(x int) []int {
 		if x%i == 0 {
 			out = append(out, i)
 		}
-	 }
-	 return out
+	}
+	return out
 }

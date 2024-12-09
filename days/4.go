@@ -37,12 +37,10 @@ func (d *Day4) GetRune(y int, x int) (rune, error) {
 	return row[x], nil
 }
 
-
-
 func (g *Day4) GetMaxX() int {
 	if g.maxX == 0 {
 		for _, row := range g.Grid {
-			g.maxX = max(g.maxX, len(row) - 1)
+			g.maxX = max(g.maxX, len(row)-1)
 		}
 	}
 	return g.maxX

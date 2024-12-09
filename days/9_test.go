@@ -60,7 +60,7 @@ func (suite *NineSuite) TestDefrag() {
 
 	disk.Defrag()
 	assert.Equal(suite.T(), defragged, disk.FullMap)
-	defragged = []int{0, 0, 9, 9, 2, 1, 1, 1, 7, 7, 7, -1, 4, 4, -1, 3, 3, 3, -1, -1, -1, -1, 5, 5, 5, 5, -1, 6, 6, 6, 6, -1, -1, -1, -1, -1, 8, 8, 8, 8, -1, -1, }
+	defragged = []int{0, 0, 9, 9, 2, 1, 1, 1, 7, 7, 7, -1, 4, 4, -1, 3, 3, 3, -1, -1, -1, -1, 5, 5, 5, 5, -1, 6, 6, 6, 6, -1, -1, -1, -1, -1, 8, 8, 8, 8, -1, -1}
 
 	disk.ChunkDefrag()
 	assert.Equal(suite.T(), defragged, disk.FullMap)

@@ -10,8 +10,8 @@ import (
 type EightSuite struct {
 	suite.Suite
 	ProvidedInput []string
-	CoordsA []days.Coords
-	Coords0 []days.Coords
+	CoordsA       []days.Coords
+	Coords0       []days.Coords
 }
 
 func TestRunEightSuite(t *testing.T) {
@@ -21,7 +21,7 @@ func TestRunEightSuite(t *testing.T) {
 func (suite *EightSuite) SetupTest() {
 	suite.ProvidedInput = []string{"............", "........0...", ".....0......", ".......0....", "....0.......", "......A.....", "............", "............", "........A...", ".........A..", "............", "............"}
 	suite.Coords0 = []days.Coords{{X: 8, Y: 1}, {X: 5, Y: 2}, {X: 7, Y: 3}, {X: 4, Y: 4}}
- 	suite.CoordsA = []days.Coords{{X: 6, Y: 5}, {X: 8, Y: 8}, {X: 9, Y: 9}}
+	suite.CoordsA = []days.Coords{{X: 6, Y: 5}, {X: 8, Y: 8}, {X: 9, Y: 9}}
 }
 
 func (suite *EightSuite) TestOneCasesPresented() {
@@ -77,10 +77,10 @@ func (suite *EightSuite) TestGetResonantAntenodes() {
 	// 	assert.Contains(suite.T(), calcAnt, ant)
 	// }
 	// AntB := []days.Coords{{X: 0, Y: 0}, {X: 1, Y: 1}, {X: 2, Y: 2}, {X: 3, Y: 3}, {X: 3, Y: 1}, {X: 4, Y: 2}, {X: 4, Y: 4}, {X: 5, Y: 5}, {X: 6, Y: 6}, {X: 6, Y: 5}, {X: 7, Y: 7}, {X: 8, Y: 8}, {X: 9, Y: 9}, {X: 10, Y: 11}, {X: 10, Y: 10}, {X: 11, Y: 11}, {X: 12, Y: 13}}
-	resAntA := []days.Coords{{X: 0, Y: 0}, {X: 1, Y: 1}, {X: 2, Y: 2}, {X: 1, Y: 3}, {X: 3, Y: 3}, {X: 2, Y: 4}, {X: 4, Y: 4}, {X: 5, Y: 5}, {X: 6, Y: 5}, {X: 6, Y: 6}, {X: 7, Y: 7}, {X: 8, Y: 8}, {X: 9, Y: 9}, {X: 10, Y: 10}, {X: 11, Y: 10}, {X: 11, Y: 11}, }
+	resAntA := []days.Coords{{X: 0, Y: 0}, {X: 1, Y: 1}, {X: 2, Y: 2}, {X: 1, Y: 3}, {X: 3, Y: 3}, {X: 2, Y: 4}, {X: 4, Y: 4}, {X: 5, Y: 5}, {X: 6, Y: 5}, {X: 6, Y: 6}, {X: 7, Y: 7}, {X: 8, Y: 8}, {X: 9, Y: 9}, {X: 10, Y: 10}, {X: 11, Y: 10}, {X: 11, Y: 11}}
 	calcResAntA := grid.GetResonantAntenodes(suite.CoordsA)
 	assert.Len(suite.T(), calcResAntA, len(resAntA))
-	
+
 	// for _, anta := range resAntA {
 	// 	assert.Contains(suite.T(), calcResAntA, anta)
 	// }
