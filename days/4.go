@@ -4,11 +4,11 @@ import "fmt"
 
 func DayFourPart1(input []string) int {
 	d := GetChizu(input)
-	return d.FindDirectionXmasCount(-1, 0) + d.FindDirectionXmasCount(-1, +1) + d.FindDirectionXmasCount(0, +1) + d.FindDirectionXmasCount(+1, +1) + d.FindDirectionXmasCount(+1, 0) + d.FindDirectionXmasCount(+1, -1) + d.FindDirectionXmasCount(0, -1) + d.FindDirectionXmasCount(-1, -1)
+	return FindDirectionXmasCount(-1, 0, d) + FindDirectionXmasCount(-1, +1, d) + FindDirectionXmasCount(0, +1, d) + FindDirectionXmasCount(+1, +1, d) + FindDirectionXmasCount(+1, 0, d) + FindDirectionXmasCount(+1, -1, d) + FindDirectionXmasCount(0, -1, d) + FindDirectionXmasCount(-1, -1, d)
 }
 func DayFourPart2(input []string) int {
 	d := GetChizu(input)
-	return d.FindXMasCount()
+	return FindXMasCount(d)
 }
 
 func GetChizu(input []string) Chizu {
@@ -61,7 +61,7 @@ func (d *Chizu) CoordMatches(x int, y int, r rune) bool {
 
 	return char == r
 }
-func (d *Chizu) FindDirectionXmasCount(xDir int, yDir int) int {
+func FindDirectionXmasCount(xDir int, yDir int, d Chizu) int {
 	count := 0
 	var mx, ax, sx, my, ay, sy int
 	for x, row := range d.Grid {
@@ -85,7 +85,7 @@ func (d *Chizu) FindDirectionXmasCount(xDir int, yDir int) int {
 	}
 	return count
 }
-func (d *Chizu) FindXMasCount() int {
+func FindXMasCount(d Chizu) int {
 	count := 0
 	for x, row := range d.Grid {
 		for y, _ := range row {

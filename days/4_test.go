@@ -47,5 +47,5 @@ func TestGetRunFromGrid(t *testing.T) {
 func TestDayFourFindNXmas(t *testing.T) {
 	input := []string{"MMMSXXMASM", "MSAMXMSMSA", "AMXSXMAAMM", "MSAMASMSMX", "XMASAMXAMM", "XXAMMXXAMA", "SMSMSASXSS", "SAXAMASAAA", "MAMMMXMMMM", "MXMXAXMASX"}
 	d4 := days.GetChizu(input)
-	assert.Equal(t, 2, d4.FindDirectionXmasCount(-1, 0))
+	assert.Equal(t, 2, days.FindDirectionXmasCount(-1, 0, d4))
 }
