@@ -6,7 +6,7 @@ import (
 )
 
 func DayEightPart1(input []string) int {
-	grid := GetDay4(input)
+	grid := GetChizu(input)
 	uniqueAntenodes := make([]Coords, 0)
 	anteni := make(map[string][]Coords, 0)
 	for i := 0; i <= 9; i++ {
@@ -30,7 +30,7 @@ func DayEightPart1(input []string) int {
 }
 
 func DayEightPart2(input []string) int {
-	grid := GetDay4(input)
+	grid := GetChizu(input)
 	uniqueAntenodes := make([]Coords, 0)
 	anteni := make(map[string][]Coords, 0)
 	for i := 0; i <= 9; i++ {
@@ -54,7 +54,7 @@ func DayEightPart2(input []string) int {
 	return len(uniqueAntenodes)
 }
 
-func (g *Day4) GetCoordsFor(runes []rune) []Coords {
+func (g *Chizu) GetCoordsFor(runes []rune) []Coords {
 	out := make([]Coords, 0)
 	for y, row := range g.Grid {
 		for x, r := range row {
@@ -66,12 +66,12 @@ func (g *Day4) GetCoordsFor(runes []rune) []Coords {
 	return out
 }
 
-func (g *Day4) IsInGrid(c Coords) bool {
+func (g *Chizu) IsInGrid(c Coords) bool {
 	_, err := g.GetRune(c.Y, c.X)
 	return err == nil
 }
 
-func (g *Day4) GetAntenodes(c []Coords) []Coords {
+func (g *Chizu) GetAntenodes(c []Coords) []Coords {
 	out := make([]Coords, 0)
 	for pi, coordA := range c {
 		for si, coordB := range c {
@@ -90,7 +90,7 @@ func (g *Day4) GetAntenodes(c []Coords) []Coords {
 	return out
 }
 
-func (g *Day4) GetResonantAntenodes(c []Coords) []Coords {
+func (g *Chizu) GetResonantAntenodes(c []Coords) []Coords {
 	out := make([]Coords, 0)
 	if len(c) <= 1 {
 		return out

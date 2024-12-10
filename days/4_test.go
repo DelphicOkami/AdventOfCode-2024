@@ -16,9 +16,9 @@ func TestDayFourPartTwoCasesPresented(t *testing.T) {
 	assert.Equal(t, 9, days.DayFourPart2(input))
 }
 
-func TestGetDay4StringToRuneSlice(t *testing.T) {
+func TestGetChizuStringToRuneSlice(t *testing.T) {
 	input := []string{"MMMSXXMASM"}
-	d4 := days.GetDay4(input)
+	d4 := days.GetChizu(input)
 
 	assert.Equal(t, 'M', d4.Grid[0][0])
 	assert.Equal(t, 'M', d4.Grid[0][1])
@@ -29,7 +29,7 @@ func TestGetDay4StringToRuneSlice(t *testing.T) {
 
 func TestGetRunFromGrid(t *testing.T) {
 	input := []string{"MMMSXXMASM", "MSAMXMSMSA", "AMXSXMAAMM", "MSAMASMSMX", "XMASAMXAMM", "XXAMMXXAMA", "SMSMSASXSS", "SAXAMASAAA", "MAMMMXMMMM", "MXMXAXMASX"}
-	d4 := days.GetDay4(input)
+	d4 := days.GetChizu(input)
 	r, err := d4.GetRune(3, 4)
 	assert.Equal(t, 'A', r)
 	assert.Nil(t, err)
@@ -46,6 +46,6 @@ func TestGetRunFromGrid(t *testing.T) {
 
 func TestDayFourFindNXmas(t *testing.T) {
 	input := []string{"MMMSXXMASM", "MSAMXMSMSA", "AMXSXMAAMM", "MSAMASMSMX", "XMASAMXAMM", "XXAMMXXAMA", "SMSMSASXSS", "SAXAMASAAA", "MAMMMXMMMM", "MXMXAXMASX"}
-	d4 := days.GetDay4(input)
+	d4 := days.GetChizu(input)
 	assert.Equal(t, 2, d4.FindDirectionXmasCount(-1, 0))
 }

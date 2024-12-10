@@ -3,30 +3,30 @@ package days
 import "fmt"
 
 func DayFourPart1(input []string) int {
-	d := GetDay4(input)
+	d := GetChizu(input)
 	return d.FindDirectionXmasCount(-1, 0) + d.FindDirectionXmasCount(-1, +1) + d.FindDirectionXmasCount(0, +1) + d.FindDirectionXmasCount(+1, +1) + d.FindDirectionXmasCount(+1, 0) + d.FindDirectionXmasCount(+1, -1) + d.FindDirectionXmasCount(0, -1) + d.FindDirectionXmasCount(-1, -1)
 }
 func DayFourPart2(input []string) int {
-	d := GetDay4(input)
+	d := GetChizu(input)
 	return d.FindXMasCount()
 }
 
-func GetDay4(input []string) Day4 {
+func GetChizu(input []string) Chizu {
 	grid := make([][]rune, 0)
 	for _, line := range input {
 		grid = append(grid, []rune(line))
 	}
 
-	return Day4{Grid: grid}
+	return Chizu{Grid: grid}
 }
 
-type Day4 struct {
+type Chizu struct {
 	Grid [][]rune
 	maxX int
 	maxY int
 }
 
-func (d *Day4) GetRune(y int, x int) (rune, error) {
+func (d *Chizu) GetRune(y int, x int) (rune, error) {
 	if x < 0 || y < 0 || y > d.GetMaxY() || x > d.GetMaxX() {
 		return '*', fmt.Errorf("out of bounds")
 	}
@@ -37,7 +37,7 @@ func (d *Day4) GetRune(y int, x int) (rune, error) {
 	return row[x], nil
 }
 
-func (g *Day4) GetMaxX() int {
+func (g *Chizu) GetMaxX() int {
 	if g.maxX == 0 {
 		for _, row := range g.Grid {
 			g.maxX = max(g.maxX, len(row)-1)
@@ -46,14 +46,14 @@ func (g *Day4) GetMaxX() int {
 	return g.maxX
 }
 
-func (g *Day4) GetMaxY() int {
+func (g *Chizu) GetMaxY() int {
 	if g.maxY == 0 {
 		g.maxY = len(g.Grid) - 1
 	}
 	return g.maxY
 }
 
-func (d *Day4) CoordMatches(x int, y int, r rune) bool {
+func (d *Chizu) CoordMatches(x int, y int, r rune) bool {
 	char, err := d.GetRune(x, y)
 	if err != nil {
 		return false
@@ -61,7 +61,7 @@ func (d *Day4) CoordMatches(x int, y int, r rune) bool {
 
 	return char == r
 }
-func (d *Day4) FindDirectionXmasCount(xDir int, yDir int) int {
+func (d *Chizu) FindDirectionXmasCount(xDir int, yDir int) int {
 	count := 0
 	var mx, ax, sx, my, ay, sy int
 	for x, row := range d.Grid {
@@ -85,7 +85,7 @@ func (d *Day4) FindDirectionXmasCount(xDir int, yDir int) int {
 	}
 	return count
 }
-func (d *Day4) FindXMasCount() int {
+func (d *Chizu) FindXMasCount() int {
 	count := 0
 	for x, row := range d.Grid {
 		for y, _ := range row {

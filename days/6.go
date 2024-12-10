@@ -41,7 +41,7 @@ func DaySixPart2(input []string) int {
 }
 
 func ParseDay6Map(input []string) Day6Map {
-	grid := GetDay4(input)
+	grid := GetChizu(input)
 	guard := Guard{}
 	for x, column := range grid.Grid {
 		for y, rune := range column {
@@ -82,7 +82,7 @@ func (g *Guard) Turn() {
 }
 
 type Day6Map struct {
-	Grid  Day4
+	Grid  Chizu
 	Guard Guard
 }
 
@@ -134,7 +134,7 @@ func (d *Day6Map) Copy() Day6Map {
 		Facing:   d.Guard.Facing,
 	}
 	return Day6Map{
-		Grid:  Day4{Grid: grid},
+		Grid:  Chizu{Grid: grid},
 		Guard: g,
 	}
 }

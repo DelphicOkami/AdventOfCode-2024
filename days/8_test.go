@@ -33,7 +33,7 @@ func (suite *EightSuite) TestTwoCasesPresented() {
 }
 
 func (suite *EightSuite) TestGetAntennaLocations() {
-	grid := days.GetDay4(suite.ProvidedInput)
+	grid := days.GetChizu(suite.ProvidedInput)
 	assert.Equal(suite.T(), suite.Coords0, grid.GetCoordsFor([]rune{'0'}))
 	assert.Equal(suite.T(), suite.CoordsA, grid.GetCoordsFor([]rune{'A'}))
 }
@@ -50,7 +50,7 @@ func (suite *EightSuite) TestGetDifference() {
 }
 
 func (suite *EightSuite) TestGetAntenodes() {
-	grid := days.GetDay4(suite.ProvidedInput)
+	grid := days.GetChizu(suite.ProvidedInput)
 
 	ant0 := []days.Coords{{X: 11, Y: 0}, {X: 2, Y: 3}, {X: 3, Y: 1}, {X: 6, Y: 0}, {X: 6, Y: 5}, {X: 9, Y: 4}, {X: 10, Y: 2}, {X: 0, Y: 7}, {X: 3, Y: 6}, {X: 1, Y: 5}}
 	antA := []days.Coords{{X: 4, Y: 2}, {X: 3, Y: 1}, {X: 10, Y: 11}, {X: 7, Y: 7}, {X: 10, Y: 10}}
@@ -67,7 +67,7 @@ func (suite *EightSuite) TestGetAntenodes() {
 }
 
 func (suite *EightSuite) TestGetResonantAntenodes() {
-	grid := days.GetDay4(suite.ProvidedInput)
+	grid := days.GetChizu(suite.ProvidedInput)
 	// crds := []days.Coords{{X: 4, Y: 4}, {X: 6, Y: 8}}
 
 	// ant := []days.Coords{{X: 2, Y: 0}, {X: 3, Y: 2}, {X: 4, Y: 4}, {X: 5, Y: 6}, {X: 6, Y: 8}, {X: 7, Y: 10}}
