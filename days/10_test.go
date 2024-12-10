@@ -25,7 +25,7 @@ func (suite *TenSuite) TestOneCasesPresented() {
 }
 
 func (suite *TenSuite) TestTwoCasesPresented() {
-	assert.Equal(suite.T(), 0, days.DayTenPart2(suite.ProvidedInput))
+	assert.Equal(suite.T(), 81, days.DayTenPart2(suite.ProvidedInput))
 }
 
 func (suite *TenSuite) TestRIConversion() {
@@ -73,7 +73,7 @@ func (suite *TenSuite) TestGetIntDecreasingTrailHeads() {
 	r, _ := chizu.GetRuneFromCoords(peakCoords)
 	assert.Equal(suite.T(), '9', r)
 	headsForPeak := []days.Coords{{Y: 5, X: 2}}
-	assert.Equal(suite.T(), headsForPeak, chizu.GetIntDecreasingTrailHeadsFrom(peakCoords))
+	assert.Equal(suite.T(), headsForPeak, chizu.GetIntDecreasingTrailHeadsFrom(peakCoords, true))
 }
 
 func (suite *TenSuite) TestGetIntIncreasingTrailHeads() {
@@ -82,12 +82,14 @@ func (suite *TenSuite) TestGetIntIncreasingTrailHeads() {
 	r, _ := chizu.GetRuneFromCoords(headCoords)
 	assert.Equal(suite.T(), '0', r)
 	peaksForHead := []days.Coords{{Y: 6, X: 4}}
-	assert.Equal(suite.T(), peaksForHead, chizu.GetIntIncreasingTrailHeadsFrom(headCoords))
+	assert.Equal(suite.T(), peaksForHead, chizu.GetIntIncreasingTrailHeadsFrom(headCoords, true))
 	headCoords = days.Coords{Y: 4, X: 6}
 	r, _ = chizu.GetRuneFromCoords(headCoords)
 	assert.Equal(suite.T(), '0', r)
 	peaksForHead = []days.Coords{{Y: 2, X: 5}, {Y: 4, X: 5}, {Y: 3, X: 4}}
-	assert.Equal(suite.T(), peaksForHead, chizu.GetIntIncreasingTrailHeadsFrom(headCoords))
+	assert.Equal(suite.T(), peaksForHead, chizu.GetIntIncreasingTrailHeadsFrom(headCoords, true))
+	peaksForHead = []days.Coords{{Y: 2, X: 5}, {Y: 2, X: 5}, {Y: 4, X: 5}, {Y: 3, X: 4}}
+	assert.Equal(suite.T(), peaksForHead, chizu.GetIntIncreasingTrailHeadsFrom(headCoords, false))
 }
 
 func (suite *TenSuite) TestGetPeaks() {
