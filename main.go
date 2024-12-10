@@ -90,6 +90,7 @@ func main() {
 		case 2:
 			out = strconv.Itoa(days.DayNinePart2(lines))
 		}
+	//DAY PLACEHOLDER//
 	default:
 		fmt.Printf("Invalid day %d provided\n", *day)
 		os.Exit(1)

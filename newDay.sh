@@ -22,3 +22,6 @@ cp days/blank_test.go "days/${day}_test.go"
 
 sed -i "s/Blank/${dayName}/g" days/${day}.go
 sed -i "s/Blank/${dayName}/g" days/${day}_test.go
+sed -i "s/\/\/DAY PLACEHOLDER\/\//case ${day}:\nswitch *part {\ncase 1:\nout = strconv.Itoa(days.Day${dayName}Part1(lines))\ncase 2:\nout = strconv.Itoa(days.Day${dayName}Part2(lines))\n}\n\/\/DAY PLACEHOLDER\/\//" main.go
+
+go fmt ./...
