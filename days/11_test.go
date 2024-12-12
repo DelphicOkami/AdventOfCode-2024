@@ -25,5 +25,5 @@ func (suite *ElevenSuite) TestOneCasesPresented() {
 }
 
 func (suite *ElevenSuite) TestTwoCasesPresented() {
-	assert.Equal(suite.T(), 0, days.DayElevenPart2(suite.ProvidedInput))
+	assert.Equal(suite.T(), 65601038650482, days.DayElevenPart2(suite.ProvidedInput))
 }
