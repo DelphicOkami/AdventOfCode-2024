@@ -28,7 +28,7 @@ func (suite *TwelveSuite) TestOneCasesPresented() {
 }
 
 func (suite *TwelveSuite) TestTwoCasesPresented() {
-	assert.Equal(suite.T(), 0, days.DayTwelvePart2(suite.ProvidedInput))
+	assert.Equal(suite.T(), 1206, days.DayTwelvePart2(suite.ProvidedInput))
 }
 
 func (suite *TwelveSuite) TestGetPlot() {
@@ -41,6 +41,7 @@ func (suite *TwelveSuite) TestGetPlot() {
 	for _, c := range expectedPlot {
 		assert.Contains(suite.T(), plot.Spots, c)
 	}
+	assert.Equal(suite.T(), 4, plot.GetFenceSegments())
 	//B
 	plot = g.GetPlotFrom(days.Coords{X: 0, Y: 1})
 	expectedPlot = []days.Coords{{X: 0, Y: 1}, {X: 1, Y: 1}, {X: 0, Y: 2}, {X: 1, Y: 2}}
@@ -49,6 +50,7 @@ func (suite *TwelveSuite) TestGetPlot() {
 	for _, c := range expectedPlot {
 		assert.Contains(suite.T(), plot.Spots, c)
 	}
+	assert.Equal(suite.T(), 4, plot.GetFenceSegments())
 	//C
 	plot = g.GetPlotFrom(days.Coords{X: 2, Y: 1})
 	expectedPlot = []days.Coords{{X: 2, Y: 1}, {X: 2, Y: 2}, {X: 3, Y: 2}, {X: 3, Y: 3}}
@@ -57,6 +59,7 @@ func (suite *TwelveSuite) TestGetPlot() {
 	for _, c := range expectedPlot {
 		assert.Contains(suite.T(), plot.Spots, c)
 	}
+	assert.Equal(suite.T(), 8, plot.GetFenceSegments())
 	//D
 	plot = g.GetPlotFrom(days.Coords{X: 3, Y: 1})
 	expectedPlot = []days.Coords{{X: 3, Y: 1}}
@@ -65,6 +68,7 @@ func (suite *TwelveSuite) TestGetPlot() {
 	for _, c := range expectedPlot {
 		assert.Contains(suite.T(), plot.Spots, c)
 	}
+	assert.Equal(suite.T(), 4, plot.GetFenceSegments())
 	//E
 	plot = g.GetPlotFrom(days.Coords{X: 0, Y: 3})
 	expectedPlot = []days.Coords{{X: 0, Y: 3}, {X: 1, Y: 3}, {X: 0, Y: 3}}
@@ -73,4 +77,5 @@ func (suite *TwelveSuite) TestGetPlot() {
 	for _, c := range expectedPlot {
 		assert.Contains(suite.T(), plot.Spots, c)
 	}
+	assert.Equal(suite.T(), 4, plot.GetFenceSegments())
 }
