@@ -62,7 +62,7 @@ func ElevenGetStonesAfter(st elevenToBlink) int {
 
 	blunk := ElevenHardBlink(st.Number)
 
-	elevenPreMapped[st] = ElevenGetStoneCount(blunk, st.RemainingBlinks - 1)
+	elevenPreMapped[st] = ElevenGetStoneCount(blunk, st.RemainingBlinks-1)
 	return elevenPreMapped[st]
 }
 
