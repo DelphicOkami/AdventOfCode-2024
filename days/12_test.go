@@ -9,7 +9,8 @@ import (
 
 type TwelveSuite struct {
 	suite.Suite
-	ProvidedInput []string
+	ProvidedInput       []string
+	ProvidedSimpleInput []string
 }
 
 func TestRunTwelveSuite(t *testing.T) {
@@ -17,11 +18,12 @@ func TestRunTwelveSuite(t *testing.T) {
 }
 
 func (suite *TwelveSuite) SetupTest() {
-	suite.ProvidedInput = []string{}
+	suite.ProvidedInput = []string{"RRRRIICCFF", "RRRRIICCCF", "VVRRRCCFFF", "VVRCCCJFFF", "VVVVCJJCFE", "VVIVCCJJEE", "VVIIICJJEE", "MIIIIIJJEE", "MIIISIJEEE", "MMMISSJEEE"}
+	suite.ProvidedSimpleInput = []string{"AAAA", "BBCD", "BBCC", "EEEC"}
 }
 
 func (suite *TwelveSuite) TestOneCasesPresented() {
-	assert.Equal(suite.T(), 0, days.DayTwelvePart1(suite.ProvidedInput))
+	assert.Equal(suite.T(), 1930, days.DayTwelvePart1(suite.ProvidedInput))
 }
 
 func (suite *TwelveSuite) TestTwoCasesPresented() {
