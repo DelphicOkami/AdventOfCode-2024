@@ -2,9 +2,10 @@ package days_test
 
 import (
 	"aoc/days"
+	"testing"
+
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
-	"testing"
 )
 
 type TwelveSuite struct {
@@ -28,4 +29,48 @@ func (suite *TwelveSuite) TestOneCasesPresented() {
 
 func (suite *TwelveSuite) TestTwoCasesPresented() {
 	assert.Equal(suite.T(), 0, days.DayTwelvePart2(suite.ProvidedInput))
+}
+
+func (suite *TwelveSuite) TestGetPlot() {
+	g := days.TweleveGetGarden(suite.ProvidedSimpleInput)
+	plot := g.GetPlotFrom(days.Coords{X: 0, Y: 0})
+	//A
+	expectedPlot := []days.Coords{{X: 0, Y: 0}, {X: 1, Y: 0}, {X: 2, Y: 0}, {X: 3, Y: 0}}
+	assert.Len(suite.T(), plot.Spots, 4)
+	assert.Equal(suite.T(), 10, plot.Perimiter)
+	for _, c := range expectedPlot {
+		assert.Contains(suite.T(), plot.Spots, c)
+	}
+	//B
+	plot = g.GetPlotFrom(days.Coords{X: 0, Y: 1})
+	expectedPlot = []days.Coords{{X: 0, Y: 1}, {X: 1, Y: 1}, {X: 0, Y: 2}, {X: 1, Y: 2}}
+	assert.Len(suite.T(), plot.Spots, 4)
+	assert.Equal(suite.T(), 8, plot.Perimiter)
+	for _, c := range expectedPlot {
+		assert.Contains(suite.T(), plot.Spots, c)
+	}
+	//C
+	plot = g.GetPlotFrom(days.Coords{X: 2, Y: 1})
+	expectedPlot = []days.Coords{{X: 2, Y: 1}, {X: 2, Y: 2}, {X: 3, Y: 2}, {X: 3, Y: 3}}
+	assert.Len(suite.T(), plot.Spots, 4)
+	assert.Equal(suite.T(), 10, plot.Perimiter)
+	for _, c := range expectedPlot {
+		assert.Contains(suite.T(), plot.Spots, c)
+	}
+	//D
+	plot = g.GetPlotFrom(days.Coords{X: 3, Y: 1})
+	expectedPlot = []days.Coords{{X: 3, Y: 1}}
+	assert.Len(suite.T(), plot.Spots, 1)
+	assert.Equal(suite.T(), 4, plot.Perimiter)
+	for _, c := range expectedPlot {
+		assert.Contains(suite.T(), plot.Spots, c)
+	}
+	//E
+	plot = g.GetPlotFrom(days.Coords{X: 0, Y: 3})
+	expectedPlot = []days.Coords{{X: 0, Y: 3}, {X: 1, Y: 3}, {X: 0, Y: 3}}
+	assert.Len(suite.T(), plot.Spots, 3)
+	assert.Equal(suite.T(), 8, plot.Perimiter)
+	for _, c := range expectedPlot {
+		assert.Contains(suite.T(), plot.Spots, c)
+	}
 }

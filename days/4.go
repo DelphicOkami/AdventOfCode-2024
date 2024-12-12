@@ -65,7 +65,7 @@ func FindDirectionXmasCount(xDir int, yDir int, d Chizu) int {
 	count := 0
 	var mx, ax, sx, my, ay, sy int
 	for x, row := range d.Grid {
-		for y, _ := range row {
+		for y := range row {
 			if d.CoordMatches(x, y, 'X') {
 				mx = x + xDir
 				my = y + yDir

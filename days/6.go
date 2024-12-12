@@ -124,9 +124,7 @@ func (d *Day6Map) Copy() Day6Map {
 	grid := make([][]rune, 0)
 	for _, row := range d.Grid.Grid {
 		r := make([]rune, 0)
-		for _, cell := range row {
-			r = append(r, cell)
-		}
+		r = append(r, row...)
 		grid = append(grid, r)
 	}
 	g := Guard{

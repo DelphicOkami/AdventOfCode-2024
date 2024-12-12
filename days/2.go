@@ -66,7 +66,7 @@ func IsReportSafeWithDamnpener(report []int) bool {
 		return true
 	}
 	unsafeIndexes := make([]int, 0)
-	for i, _ := range report {
+	for i := range report {
 		safeReport := RemoveIntIndex(reportClone, i)
 		if IsReportSafeWithoutDamnpener(safeReport) {
 			unsafeIndexes = append(unsafeIndexes, i)
