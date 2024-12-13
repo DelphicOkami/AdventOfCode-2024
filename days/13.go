@@ -64,13 +64,6 @@ func ThirteenParseGames(input []string, prizeInflation int) []ThirteenGame {
 	return out
 }
 
-func abs(x int) int {
-	if x < 0 {
-		return -1 * x
-	}
-	return x
-}
-
 type ThirteenGame struct {
 	ButtonA           Coords
 	ButtonB           Coords
@@ -85,8 +78,17 @@ func (g *ThirteenGame) CalculatePresses() (bool, int, int) {
 	bx := g.ButtonB.X * g.ButtonB.Y
 	px := g.Prize.X * g.ButtonB.Y
 
-	xDelta := abs(ax - ay)
-	pDelta := abs(px - py)
+	var xDelta, pDelta int
+	if ax > ay {
+		xDelta = ax - ay
+	} else {
+		xDelta = ay - ax
+	}
+	if px > py {
+		pDelta = px - py
+	} else {
+		pDelta = py - px
+	}
 
 	if pDelta % xDelta != 0 {
 		return false, -1, -1
