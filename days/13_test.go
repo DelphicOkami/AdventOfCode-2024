@@ -29,7 +29,7 @@ func (suite *ThirteenSuite) TestTwoCasesPresented() {
 }
 
 func (suite *ThirteenSuite) TestThirteenParsing() {
-	thirteenGames := days.ThirteenParseGames(suite.ProvidedInput)
+	thirteenGames := days.ThirteenParseGames(suite.ProvidedInput, 0)
 	assert.Equal(suite.T(), 94, thirteenGames[0].ButtonA.X)
 	assert.Equal(suite.T(), 34, thirteenGames[0].ButtonA.Y)
 	assert.Equal(suite.T(), 22, thirteenGames[0].ButtonB.X)
@@ -39,17 +39,17 @@ func (suite *ThirteenSuite) TestThirteenParsing() {
 }
 
 func (suite *ThirteenSuite) TestThirteenWinability() {
-	thirteenGames := days.ThirteenParseGames(suite.ProvidedInput)
-	assert.True(suite.T(), thirteenGames[0].IsWinnable())
-	assert.False(suite.T(), thirteenGames[1].IsWinnable())
-	assert.True(suite.T(), thirteenGames[2].IsWinnable())
-	assert.False(suite.T(), thirteenGames[3].IsWinnable())
+	thirteenGames := days.ThirteenParseGames(suite.ProvidedInput, 0)
+	assert.True(suite.T(), thirteenGames[0].IsWinnable(100))
+	assert.False(suite.T(), thirteenGames[1].IsWinnable(100))
+	assert.True(suite.T(), thirteenGames[2].IsWinnable(100))
+	assert.False(suite.T(), thirteenGames[3].IsWinnable(100))
 }
 
 func (suite *ThirteenSuite) TestGetCheapest() {
-	thirteenGames := days.ThirteenParseGames(suite.ProvidedInput)
-	zeroCheapest := thirteenGames[0].GetCheapestWin()
-	twoCheapest := thirteenGames[2].GetCheapestWin()
+	thirteenGames := days.ThirteenParseGames(suite.ProvidedInput, 0)
+	zeroCheapest := thirteenGames[0].GetCheapestWin(100)
+	twoCheapest := thirteenGames[2].GetCheapestWin(100)
 	assert.Equal(suite.T(), 280, zeroCheapest.GetTotalCost())
 	assert.Equal(suite.T(), 200, twoCheapest.GetTotalCost())
 }
