@@ -8,17 +8,25 @@ import (
 func DayThirteenPart1(input []string) int {
 	games := ThirteenParseGames(input, 0)
 	total := 0
-	for _, g := range games {
-		if g.IsWinnable(100) {
-			win := g.GetCheapestWin(100)
-			total += win.GetTotalCost()
+	for _,g  := range games {
+		winnable, aPresses, bPresses := g.CalculatePresses()
+		if winnable {
+			total += (aPresses * 3) + (bPresses)
 		}
 	}
-	return total
+	return int(total)
 }
 
 func DayThirteenPart2(input []string) int {
-	return 0
+	games := ThirteenParseGames(input, 10000000000000)
+	total := 0
+	for _,g  := range games {
+		winnable, aPresses, bPresses := g.CalculatePresses()
+		if winnable {
+			total += (aPresses * 3) + (bPresses)
+		}
+	}
+	return total
 }
 
 func GetCoordsFromStringParam(x, y string) Coords {
@@ -48,7 +56,6 @@ func ThirteenParseGames(input []string, prizeInflation int) []ThirteenGame {
 			ButtonA:           GetCoordsFromStringParam(ac[1], ac[2]),
 			ButtonB:           GetCoordsFromStringParam(bc[1], bc[2]),
 			Prize:             GetCoordsFromStringParam(pc[1], pc[2]),
-			possibleSolutions: make(map[int][]ThirteenSolution, 0),
 		}
 		game.Prize.X = game.Prize.X + prizeInflation
 		game.Prize.Y = game.Prize.Y + prizeInflation
@@ -57,67 +64,42 @@ func ThirteenParseGames(input []string, prizeInflation int) []ThirteenGame {
 	return out
 }
 
+func abs(x int) int {
+	if x < 0 {
+		return -1 * x
+	}
+	return x
+}
+
 type ThirteenGame struct {
 	ButtonA           Coords
 	ButtonB           Coords
 	Prize             Coords
-	possibleSolutions map[int][]ThirteenSolution
 }
 
-func (g *ThirteenGame) IsWinnable(maxPresses int) bool {
-	mp, ok := g.possibleSolutions[maxPresses]
-	if ok {
-		return len(mp) > 0
-	}
-	g.possibleSolutions[maxPresses] = make([]ThirteenSolution, 0)
-	maxAPresses := min(maxPresses, g.Prize.X/g.ButtonA.X, g.Prize.Y/g.ButtonA.Y)
-	maxBPresses := min(maxPresses, g.Prize.X/g.ButtonB.X, g.Prize.Y/g.ButtonB.Y)
-	for i := maxBPresses; i >= 0; i-- {
-		bX := i * g.ButtonB.X
-		bY := i * g.ButtonB.Y
-		for j := 0; j <= maxAPresses; j++ {
-			x := bX + (j * g.ButtonA.X)
-			y := bY + (j * g.ButtonA.Y)
-			if x == g.Prize.X && y == g.Prize.Y {
-				g.possibleSolutions[maxPresses] = append(g.possibleSolutions[maxPresses], ThirteenSolution{APresses: j, BPresses: i})
-				break
-			}
-			if x > g.Prize.X || y > g.Prize.Y {
-				break
-			}
-		}
-	}
-	return len(g.possibleSolutions[maxPresses]) > 0
-}
+func (g *ThirteenGame) CalculatePresses() (bool, int, int) {
+	ay := g.ButtonA.Y * g.ButtonB.X
+	py := g.Prize.Y * g.ButtonB.X
 
-func (g *ThirteenGame) GetCheapestWin(maxPresses int) ThirteenSolution {
-	if !g.IsWinnable(maxPresses) {
-		return ThirteenSolution{}
-	}
-	var cheapest ThirteenSolution
-	for i, s := range g.possibleSolutions[maxPresses] {
-		if i == 0 {
-			cheapest = s
-			continue
-		}
-		if s.GetTotalCost() < cheapest.GetTotalCost() {
-			cheapest = s
-		}
-	}
-	return cheapest
-}
+	ax := g.ButtonA.X * g.ButtonB.Y
+	bx := g.ButtonB.X * g.ButtonB.Y
+	px := g.Prize.X * g.ButtonB.Y
 
-type ThirteenSolution struct {
-	APresses  int
-	BPresses  int
-	totalCost int
-}
+	xDelta := abs(ax - ay)
+	pDelta := abs(px - py)
 
-func (s *ThirteenSolution) GetTotalCost() int {
-	if s.totalCost > 0 {
-		return s.totalCost
+	if pDelta % xDelta != 0 {
+		return false, -1, -1
 	}
 
-	s.totalCost = (s.APresses * 3) + (s.BPresses)
-	return s.totalCost
+	aPresses := pDelta / xDelta
+
+	if (px-aPresses*ax)%bx != 0 {
+		return false, -1, -1
+	}
+
+	bPresses := (px - aPresses * ax) / bx
+
+	return true, aPresses, bPresses
 }
+
