@@ -111,6 +111,13 @@ func main() {
 		case 2:
 			out = strconv.Itoa(days.DayTwelvePart2(lines))
 		}
+	case 13:
+		switch *part {
+		case 1:
+			out = strconv.Itoa(days.DayThirteenPart1(lines))
+		case 2:
+			out = strconv.Itoa(days.DayThirteenPart2(lines))
+		}
 		//DAY PLACEHOLDER//
 	default:
 		fmt.Printf("Invalid day %d provided\n", *day)
