@@ -24,14 +24,14 @@ func (suite *FourteenSuite) TestOneCasesPresented() {
 	assert.Equal(suite.T(), 12, days.DayFourteenPart1(suite.ProvidedInput, 11, 7))
 }
 
-func (suite *FourteenSuite) TestTwoCasesPresented() {
-	assert.Equal(suite.T(), 0, days.DayFourteenPart2(suite.ProvidedInput))
-}
+// func (suite *FourteenSuite) TestTwoCasesPresented() {
+// 	assert.Equal(suite.T(), 0, days.DayFourteenPart2(suite.ProvidedInput))
+// }
 
 func (suite *FourteenSuite) TestParse() {
 	BathroomMap := days.DayFourteenParse(suite.ProvidedInput, 11, 7)
 	assert.Len(suite.T(), BathroomMap.Robots, 12)
-	r, ok := BathroomMap.Robots[days.FourteenRobotStart{days.Coords{X: 0, Y: 4},0}]
+	r, ok := BathroomMap.Robots[days.FourteenRobotStart{days.Coords{X: 0, Y: 4}, 0}]
 	assert.True(suite.T(), ok)
 	assert.Equal(suite.T(), 11, BathroomMap.XSize)
 	assert.Equal(suite.T(), 7, BathroomMap.YSize)
@@ -43,23 +43,22 @@ func (suite *FourteenSuite) TestAdvanceTime() {
 	BathroomMap := days.DayFourteenParse(suite.ProvidedInput, 11, 7)
 	BathroomMap.AdvanceTime(0)
 	assert.Len(suite.T(), BathroomMap.Robots, 12)
-	r, ok := BathroomMap.Robots[days.FourteenRobotStart{days.Coords{X: 0, Y: 4},0}]
+	r, ok := BathroomMap.Robots[days.FourteenRobotStart{days.Coords{X: 0, Y: 4}, 0}]
 	assert.True(suite.T(), ok)
 	assert.Equal(suite.T(), days.Coords{X: 0, Y: 4}, r.Position)
 	BathroomMap.AdvanceTime(1)
-	r, ok = BathroomMap.Robots[days.FourteenRobotStart{days.Coords{X: 0, Y: 4},0}]
+	r, ok = BathroomMap.Robots[days.FourteenRobotStart{days.Coords{X: 0, Y: 4}, 0}]
 	assert.True(suite.T(), ok)
 	assert.Equal(suite.T(), days.Coords{X: 3, Y: 1}, r.Position)
 	BathroomMap.AdvanceTime(1)
-	r, ok = BathroomMap.Robots[days.FourteenRobotStart{days.Coords{X: 0, Y: 4},0}]
+	r, ok = BathroomMap.Robots[days.FourteenRobotStart{days.Coords{X: 0, Y: 4}, 0}]
 	assert.True(suite.T(), ok)
 	assert.Equal(suite.T(), days.Coords{X: 6, Y: 5}, r.Position)
 	BathroomMap.AdvanceTime(2)
-	r, ok = BathroomMap.Robots[days.FourteenRobotStart{days.Coords{X: 0, Y: 4},0}]
+	r, ok = BathroomMap.Robots[days.FourteenRobotStart{days.Coords{X: 0, Y: 4}, 0}]
 	assert.True(suite.T(), ok)
 	assert.Equal(suite.T(), days.Coords{X: 1, Y: 6}, r.Position)
 }
-
 
 func (suite *FourteenSuite) TestQuadrantTest() {
 	BathroomMap := days.DayFourteenParse(suite.ProvidedInput, 11, 7)

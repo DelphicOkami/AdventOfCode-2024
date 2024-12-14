@@ -123,7 +123,7 @@ func main() {
 		case 1:
 			out = strconv.Itoa(days.DayFourteenPart1(lines, 101, 103))
 		case 2:
-			out = strconv.Itoa(days.DayFourteenPart2(lines))
+			out = strconv.Itoa(days.DayFourteenPart2(lines, 101, 103))
 		}
 		//DAY PLACEHOLDER//
 	default:
