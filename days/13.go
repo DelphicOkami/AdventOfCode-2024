@@ -8,7 +8,7 @@ import (
 func DayThirteenPart1(input []string) int {
 	games := ThirteenParseGames(input, 0)
 	total := 0
-	for _,g  := range games {
+	for _, g := range games {
 		winnable, aPresses, bPresses := g.CalculatePresses()
 		if winnable {
 			total += (aPresses * 3) + (bPresses)
@@ -20,7 +20,7 @@ func DayThirteenPart1(input []string) int {
 func DayThirteenPart2(input []string) int {
 	games := ThirteenParseGames(input, 10000000000000)
 	total := 0
-	for _,g  := range games {
+	for _, g := range games {
 		winnable, aPresses, bPresses := g.CalculatePresses()
 		if winnable {
 			total += (aPresses * 3) + (bPresses)
@@ -53,9 +53,9 @@ func ThirteenParseGames(input []string, prizeInflation int) []ThirteenGame {
 		bc := MatchAllReg.FindStringSubmatch(BLine)
 		pc := MatchAllReg.FindStringSubmatch(PrizeLine)
 		game := ThirteenGame{
-			ButtonA:           GetCoordsFromStringParam(ac[1], ac[2]),
-			ButtonB:           GetCoordsFromStringParam(bc[1], bc[2]),
-			Prize:             GetCoordsFromStringParam(pc[1], pc[2]),
+			ButtonA: GetCoordsFromStringParam(ac[1], ac[2]),
+			ButtonB: GetCoordsFromStringParam(bc[1], bc[2]),
+			Prize:   GetCoordsFromStringParam(pc[1], pc[2]),
 		}
 		game.Prize.X = game.Prize.X + prizeInflation
 		game.Prize.Y = game.Prize.Y + prizeInflation
@@ -65,9 +65,9 @@ func ThirteenParseGames(input []string, prizeInflation int) []ThirteenGame {
 }
 
 type ThirteenGame struct {
-	ButtonA           Coords
-	ButtonB           Coords
-	Prize             Coords
+	ButtonA Coords
+	ButtonB Coords
+	Prize   Coords
 }
 
 func (g *ThirteenGame) CalculatePresses() (bool, int, int) {
@@ -90,7 +90,7 @@ func (g *ThirteenGame) CalculatePresses() (bool, int, int) {
 		pDelta = py - px
 	}
 
-	if pDelta % xDelta != 0 {
+	if pDelta%xDelta != 0 {
 		return false, -1, -1
 	}
 
@@ -100,8 +100,7 @@ func (g *ThirteenGame) CalculatePresses() (bool, int, int) {
 		return false, -1, -1
 	}
 
-	bPresses := (px - aPresses * ax) / bx
+	bPresses := (px - aPresses*ax) / bx
 
 	return true, aPresses, bPresses
 }
-

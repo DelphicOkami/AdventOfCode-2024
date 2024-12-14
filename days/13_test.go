@@ -38,7 +38,7 @@ func (suite *ThirteenSuite) TestThirteenWinability() {
 	thirteenGames := days.ThirteenParseGames(suite.ProvidedInput, 0)
 	winnable, _, _ := thirteenGames[0].CalculatePresses()
 	assert.True(suite.T(), winnable)
-	
+
 	winnable, _, _ = thirteenGames[1].CalculatePresses()
 	assert.False(suite.T(), winnable)
 	winnable, _, _ = thirteenGames[2].CalculatePresses()
