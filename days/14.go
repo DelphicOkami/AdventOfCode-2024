@@ -34,9 +34,7 @@ func yesNo() bool {
 		Label: "Select[Yes/No]",
 		Items: []string{"Yes", "No"},
 	}
-	_, result, err := prompt.Run()
-	if err != nil {
-	}
+	_, result, _ := prompt.Run()
 	return result == "Yes"
 }
 
